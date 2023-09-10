@@ -1,0 +1,26 @@
+.page {
+  width: 100%;
+  border: 2px #ee4949 solid;
+  /* border-color: red; */
+  /* border-style: double; */
+  /* border-spacing: 10px; */
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.border {
+  /* margin: 20px; */
+  /* border: 2px #002884 solid; */
+  border-radius: 5px;
+  background-color: #ee4949;
+  color: white;
+  
+  min-width: 30vw;
+  padding: 1rem;
+  min-height: 30vh;
+  font-weight: 600;
+  font-size: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
