@@ -1,5 +1,5 @@
 {
-  "name": "ra_08_hooks-context",
+  "name": "ra_09_router_CRUD",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -40,5 +40,5 @@
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0"
   },
-  "homepage": "https://Summer20100.github.io/ra_08_hooks-context/"
+  "homepage": "https://Summer20100.github.io/ra_09_router_CRUD/"
 }
