@@ -17,7 +17,6 @@ const Crud = () => {
     console.log(id)
   }
 
-  //let url = 'https://09backend.summer20100.repl.co/posts/'
   let url = import.meta.env.VITE_BASE_URL
   let data = getData(url)
 
@@ -25,15 +24,13 @@ const Crud = () => {
     setId(newId)
   }
 
-
   return (
     <div className='mainContainer'>
       <Routes>
         <Route path='/posts/' element={<Header data={data} />} />
         <Route path="/posts/new/" element={<NewPost />} />
-        <Route path='/content/:id' element={<Content data={data} onDelete= { onDelete } newId={ newId }/>} />
-        <Route path='/correct/:id' element={<Correct data={data} id={ id }/>} />
-        {/* <Route path='*' element={<NotFound />} /> */}
+        <Route path='/content/:id' element={<Content data={data} onDelete= { onDelete } newId={ newId }/>} data={data} />
+        <Route path='/correct/:id' element={<Correct dataPrev={data} id={ id }/>} />
       </Routes>
     </div>
   )

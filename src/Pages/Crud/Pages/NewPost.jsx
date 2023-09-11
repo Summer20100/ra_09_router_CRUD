@@ -28,12 +28,9 @@ const NewPost = () => {
   }
 
   let url = import.meta.env.VITE_BASE_URL
-
-  //let url = 'https://09backend.summer20100.repl.co/posts/'
   
   const postData = async () => {
     !content 
-    //? window.location.href = 'https://09routercrud.summer20100.repl.co/posts/'
     ? window.location.href = 'http://localhost:5173/posts/'
     : await fetch(url, {
       method: 'POST',
@@ -48,7 +45,6 @@ const NewPost = () => {
       .then((response) => {
         if (response.ok) {
           window.location.href = 'http://localhost:5173/posts/'
-          //window.location.href = 'https://09routercrud.summer20100.repl.co/posts/'
           return response.json()
         }}
       )
@@ -56,8 +52,6 @@ const NewPost = () => {
       .catch((err) => {
         console.log(err)
       })
-
-    
   }
 
   return (

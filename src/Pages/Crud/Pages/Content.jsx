@@ -1,16 +1,15 @@
 import { Box, Stack, TextField, Divider, Button } from '@mui/material';
 import { useState, useEffect } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useParams, useNavigate } from 'react-router-dom';
 import { getData } from './../getData'
 
-const Content = ({ onDelete, newId }) => {
+const Content = ({ onDelete, newId, data }) => {
   const [sort, setSort] = useState()
   const [post, setPost] = useState()
   const params = useParams()
   const {id} = params
 
-  //let url = 'https://09backend.summer20100.repl.co/posts/'
   let url = import.meta.env.VITE_BASE_URL
 
   const postData = async () => {
@@ -20,7 +19,6 @@ const Content = ({ onDelete, newId }) => {
   }
   
   useEffect(() => {
-    // fetch(import.meta.env.VITE_BASE_URL + id)
     postData()
   }, [])
 
@@ -28,30 +26,24 @@ const Content = ({ onDelete, newId }) => {
     newId(id)
   }, [])
 
-  ///let data = getData(url)
-  
-  console.log(post)
-  //console.log(data)
-  //console.log(id)
-  const { content } = post
-  console.log(content)
-  
-  //const newContent = data.map(el => console.log(el))
-  //console.log(newContent)
-  
-  //const { content } = post
+  const newContent = data.filter((el, ind, array) => el.id == id)
+  const content = newContent[0].content
 
   const onClose = (id) => {
     fetch(url + id, {
       method: 'DELETE'
     })
       .then(() => {
-        //window.location.href = 'https://09routercrud.summer20100.repl.co/posts/'
         window.location.href = 'http://localhost:5173/posts/'
       })
       .catch((err) => {
         console.log(err)
       })
+  }
+
+  const navigate = useNavigate()
+  const handleBack = () => {
+    navigate(-1)
   }
 
   return (
@@ -61,22 +53,25 @@ const Content = ({ onDelete, newId }) => {
       alignItems="stretch"
       spacing={0}  
     > 
-        <Stack direction="row"  justifyContent='space-between' alignItems='center' 
-            sx={{ bgcolor: '#fff', 
-            width: 800, 
-            minHeight: 50, 
-            borderRadius: 1, 
-            paddingLeft: '15px', 
-            textAlign:'left' }}
-        >
-            <Box>ФИО</Box>
+        <Stack paddingLeft="15px" direction="row" justifyContent='space-between' alignItems='center' sx={{ bgcolor: '#fff', width: 785, minHeight: 50, borderRadius: 1 }}>
+          <Box>
+            Набор Иконок Паблика
+          </Box>
+            <Button variant="contained" sx={{ bgcolor: 'inherit', "&:hover": { bgcolor: 'inherit' }, fontSize: 10, margin: 1, minWidth: '10px', padding: .5 }} onClick={ handleBack }>
+              <CloseIcon sx={{ color: 'red', fontSize: '20px' }} />
+            </Button>
         </Stack>
         <Divider />
-        <Box sx={{ bgcolor: '#fff', width: 800, minHeight: 50, borderRadius: 1 }}>
-            {/* { newContent } */}
+
+        <Stack direction="row" justifyContent='space-between' alignItems='center' multiline
+        sx={{ bgcolor: '#fff', minHeight: 50, borderRadius: 1, paddingLeft: '15px', textAlign: 'left' }}
+      >
+          <Box >
             { content }
-        </Box>
+          </Box>
+        </Stack>
         <Divider />
+
         <Stack direction="row"  justifyContent='space-between' alignItems='center' 
             sx={{ bgcolor: '#fff', 
             width: 800, 

@@ -6,6 +6,7 @@ import Header from './Header'
 
 
 const Correct = (props) => {
+  const { dataPrev } = props
   const [content, setContent] = useState()
   const [list, setList] = useState([])
   const [data, setData] = useState()
@@ -29,17 +30,12 @@ const Correct = (props) => {
   }
 
   let url = import.meta.env.VITE_BASE_URL + id
-
-  //let url = 'https://09backend.summer20100.repl.co/posts/' + id
-
-  console.log(list)
   
   const postData = async () => {
     await fetch(url, {
       method: 'PUT',
       body: JSON.stringify({
         id: list.id,
-        //userId: list.userId,
         content: list.content
       }),
       headers: {
@@ -49,7 +45,6 @@ const Correct = (props) => {
       .then((response) => {
         if (response.ok) {
           window.location.href = 'http://localhost:5173/posts/'
-          // window.location.href = 'https://09routercrud.summer20100.repl.co/posts/'
           return response.json()
         }
       }
@@ -66,6 +61,9 @@ const Correct = (props) => {
     navigate(-1)
   }
 
+  const contentPrev = dataPrev.filter((el, ind, array) => el.id == id)
+  const contentPrevAdd = contentPrev[0].content
+
   return (
 
     <form action='#' >
@@ -79,8 +77,18 @@ const Correct = (props) => {
             </Button>
         </Stack>
         <Divider />
+
+        <Stack direction="row" justifyContent='space-between' alignItems='center' multiline
+          sx={{ bgcolor: '#fff', minHeight: 50, borderRadius: 1, paddingLeft: '15px', textAlign: 'left' }}
+        >
+          <Box multiline>
+            Текущий текст ПОСТА: { contentPrevAdd }
+          </Box>   
+        </Stack>      
+        <Divider />
+        
         <Box sx={{ bgcolor: '#fff', width: 800, minHeight: 50, borderRadius: 1 }}>
-          <TextField size="small" sx={{ m: 1, width: { sm: 500, md: '98%' }, "& .MuiInputLabel-root": { fontSize: 13 }, "& .MuiInputBase-root": { height: 35 }, }} label="Откорректируйте пост" multiline fontSize='15px' value={content} onChange={(ev) => onPost(ev)} />
+          <TextField size="small" sx={{ m: 1, width: { sm: 500, md: '98%' }, "& .MuiInputLabel-root": { fontSize: 13 }, "& .MuiInputBase-root": { height: 35 }, }} label="Новый текст поста" multiline fontSize='15px' value={content} onChange={(ev) => onPost(ev)} />
         </Box>
         <Divider />
 
